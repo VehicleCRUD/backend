@@ -45,4 +45,15 @@ public class VehicleService {
         //return vehicleDto;
         return vehicleMapper.toVehicleDto(vehicle);
     }
+
+    public VehicleDto updateVehicle(Long id, VehicleDto vehicleDto) {
+        Vehicle vehicle = vehicleRepository.findById(id)
+                .orElseThrow(() -> new AppException("Vehicle not found", HttpStatus.NOT_FOUND));
+
+        vehicleMapper.updateVehicle(vehicle, vehicleMapper.toVehicle(vehicleDto));
+
+        Vehicle updatedVehicle = vehicleRepository.save(vehicle);
+
+        return vehicleMapper.toVehicleDto(updatedVehicle);
+    }
 }
