@@ -31,4 +31,9 @@ public class VehicleController {
         VehicleDto createdVehicle = vehicleService.createVehicle(vehicleDto);
         return ResponseEntity.created(URI.create("/vehicles/" + vehicleDto.getId())).body(createdVehicle);
     }
+
+    @DeleteMapping("/vehicles/{id}")
+    public ResponseEntity<VehicleDto> deleteVehicle(@PathVariable Long id) {
+        return ResponseEntity.ok(vehicleService.deleteVehicle(id));
+    }
 }

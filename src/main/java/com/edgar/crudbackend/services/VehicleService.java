@@ -35,4 +35,14 @@ public class VehicleService {
         Vehicle savedVehicle = vehicleRepository.save(vehicle);
         return vehicleMapper.toVehicleDto(savedVehicle);
     }
+
+    public VehicleDto deleteVehicle(Long id) {
+        Vehicle vehicle = vehicleRepository.findById(id)
+                .orElseThrow(() -> new AppException("Vehicle not found", HttpStatus.NOT_FOUND));
+        //VehicleDto vehicleDto = vehicleMapper.toVehicleDto(vehicle);
+        vehicleRepository.deleteById(id);
+
+        //return vehicleDto;
+        return vehicleMapper.toVehicleDto(vehicle);
+    }
 }
