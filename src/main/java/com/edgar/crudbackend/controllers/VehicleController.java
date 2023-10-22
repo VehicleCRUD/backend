@@ -2,12 +2,12 @@ package com.edgar.crudbackend.controllers;
 
 import com.edgar.crudbackend.dtos.VehicleDto;
 import com.edgar.crudbackend.services.VehicleService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -24,5 +24,11 @@ public class VehicleController {
     @GetMapping("/vehicles/{id}")
     public ResponseEntity<VehicleDto> getVehicle(@PathVariable Long id) {
         return ResponseEntity.ok(vehicleService.getVehicle(id));
+    }
+
+    @PostMapping("/vehicles")
+    public ResponseEntity<VehicleDto> createVehicle(@Valid @RequestBody VehicleDto vehicleDto) {
+        VehicleDto createdVehicle = vehicleService.createVehicle(vehicleDto);
+        return ResponseEntity.created(URI.create("/vehicles/" + vehicleDto.getId())).body(createdVehicle);
     }
 }
