@@ -2,9 +2,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/VehicleDB
+    url: postgresql://postgres:FQAnQhB8vDdVUL2eKfAs@containers-us-west-170.railway.app:6911/railway
     username: postgres
-    password: admin123
+    password: FQAnQhB8vDdVUL2eKfAs
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
